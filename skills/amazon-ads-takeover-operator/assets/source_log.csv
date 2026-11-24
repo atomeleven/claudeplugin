@@ -1,2 +1,0 @@
-source_id,system,account_marketplace,dataset_or_report,evidence_class,date_start,date_end,latest_complete_date,pulled_at_timezone,filters,grain,row_count,pages,raw_file_or_link,limitations,status,dataset_version,recipe_version,total_count,total_pages,has_next,claim_scope,freshness_status,as_of,trace_id,aggregate_total,returned_detail_sum,residual_amount,residual_percent,spend_coverage_percent,metric_profile,currency,qualification_grain
-SRC-001,Atom11,,,,,,,,,,,,,,pending,,,,,,,,,,,,,,,,,

@@ -1,8 +1,8 @@
 {
   "name": "atom11",
   "displayName": "Atom11",
-  "version": "1.0.2",
-  "description": "Amazon Ads and retail skills that run on your Atom11 data: reports, audits, inventory and search-term reviews, and campaign changes you approve.",
+  "version": "1.0.3",
+  "description": "Amazon Ads and retail skills that run on your Atom11 data: reports, audits, charts, inventory and search-term reviews, and campaign changes you approve.",
   "author": {
     "name": "Atom11",
     "url": "https://www.atom11.co/"

@@ -6,7 +6,6 @@ offline-safe HTML brief. Each input is the exact run_analysis envelope."""
 from __future__ import annotations
 
 import argparse
-import base64
 import html
 import json
 import re
@@ -15,20 +14,15 @@ from decimal import ROUND_CEILING, Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any, Iterable
 
-LOGO_PATH = Path(__file__).resolve().parent.parent / "assets" / "atom11-logo.png"
-
-
-def brand_mark() -> str:
-    """Atom11 logo for the report header, embedded so the file stays self-contained.
-
-    Falls back to the text wordmark when the logo file is not beside the script.
-    """
-    try:
-        data = base64.b64encode(LOGO_PATH.read_bytes()).decode("ascii")
-    except OSError:
-        return '<div class="wordmark">ATOM11<i aria-hidden="true"></i></div>'
-    return f'<img class="logo" src="data:image/png;base64,{data}" alt="Atom11" width="144" height="32">'
-
+# Atom11 icon, drawn as inline SVG so the report needs no image file.
+ATOM11_ICON = (
+    '<svg class="logo" viewBox="0 0 338 338" width="32" height="32" role="img" aria-label="Atom11">'
+    '<rect width="338" height="338" rx="22" fill="#2250F3"/>'
+    '<circle cx="126" cy="107.5" r="36" fill="#fff"/>'
+    '<path d="M158 154.5A55.75 55.75 0 1 0 158 264Z" fill="#fff"/>'
+    '<path d="M184 265V71.5A64 64 0 0 1 248 135.5V265Z" fill="#fff"/>'
+    '</svg>'
+)
 
 NARRATIVE_MODULES = ("restock", "campaign_oos", "ad_group_low")
 STATUS_LABELS = {
@@ -618,7 +612,7 @@ font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans
 .top-signal{{height:12px;background:linear-gradient(90deg,var(--cobalt) 0 68%,var(--citrus) 68%)}}
 .page{{width:min(1120px,calc(100% - 32px));margin:28px auto 52px}}
 .mast{{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;padding:18px 0 28px}}
-.mast .logo{{height:32px;width:auto;display:block}}
+.brand{{display:flex;align-items:center;gap:10px}} .brand .logo{{width:32px;height:32px;display:block}}
 .wordmark{{font-weight:900;letter-spacing:.16em;font-size:20px}} .wordmark i{{display:inline-block;width:10px;height:10px;
 background:var(--citrus);border-radius:50%;margin-left:3px}} .classification{{font-size:12px;font-weight:800;
 letter-spacing:.1em;text-transform:uppercase;color:var(--subtle)}}
@@ -695,7 +689,7 @@ gap:20px;color:var(--subtle);font-size:12px;padding:24px 4px}}
 <div class="top-signal"></div>
 <main class="page">
   <header class="mast">
-    {brand_mark()}
+    <div class="brand">{ATOM11_ICON}<div class="wordmark">ATOM11<i aria-hidden="true"></i></div></div>
     <div class="classification">Read-only · Client decision brief</div>
   </header>
   <section class="cover">

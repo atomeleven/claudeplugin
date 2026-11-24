@@ -33,13 +33,15 @@ DEMO_CONNECTOR = SKILL_DIR / "assets" / "demo-connector.js"
 WARNINGS: list[str] = []
 
 
-def _data_uri(path: Path) -> str:
-    import base64
-    return "data:image/png;base64," + base64.b64encode(path.read_bytes()).decode("ascii")
-
-
-LOGO_LIGHT = _data_uri(SKILL_DIR / "assets" / "atom11-logo.png")
-LOGO_DARK = _data_uri(SKILL_DIR / "assets" / "atom11-logo-dark.png")
+# Atom11 icon, drawn as inline SVG so the page needs no image file.
+ATOM11_ICON = (
+    '<svg class="logo" viewBox="0 0 338 338" width="32" height="32" role="img" aria-label="Atom11">'
+    '<rect width="338" height="338" rx="22" fill="#2250F3"/>'
+    '<circle cx="126" cy="107.5" r="36" fill="#fff"/>'
+    '<path d="M158 154.5A55.75 55.75 0 1 0 158 264Z" fill="#fff"/>'
+    '<path d="M184 265V71.5A64 64 0 0 1 248 135.5V265Z" fill="#fff"/>'
+    '</svg>'
+)
 RULE_STATUSES = {"covered", "not_covered", "unknown", "dayparting_adaptive", "dayparting_override"}
 RECENT_STATUSES = {"recent", "none", "unknown"}
 ADD_FAMILIES = {"negative_keyword_add", "negative_search_term_add", "negative_target_add", "negative_target_search_term_add",
@@ -737,8 +739,7 @@ def render_body(doc: dict[str, Any], mode: str, demo: bool) -> str:
         meta.append(f"prepared {doc['prepared']}")
 
     parts = ['<header class="head"><div class="brand">'
-             f'<img class="logo logo-light" src="{LOGO_LIGHT}" alt="Atom11" width="144" height="32">'
-             f'<img class="logo logo-dark" src="{LOGO_DARK}" alt="Atom11" width="144" height="32">'
+             f'{ATOM11_ICON}<span class="brand-word">Atom11</span>'
              '<span class="brand-name">Deep Audit</span></div>'
              f'<h1>{esc(account_label(account))}</h1><p class="meta">{esc(" · ".join(meta))}</p></header>']
     if demo:

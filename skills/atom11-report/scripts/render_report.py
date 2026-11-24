@@ -16,7 +16,6 @@ Standard library only (Python 3.9+). The HTML has no remote resources.
 from __future__ import annotations
 
 import argparse
-import base64
 import datetime as dt
 import html
 import json
@@ -26,21 +25,15 @@ import sys
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from typing import Any, Iterable
 
-LOGO_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'atom11-logo.png')
-
-
-def brand_mark() -> str:
-    """Atom11 logo for the report cover, embedded so the file stays self-contained.
-
-    Falls back to the text wordmark when the logo file is not beside the script.
-    """
-    try:
-        with open(LOGO_PATH, 'rb') as handle:
-            data = base64.b64encode(handle.read()).decode('ascii')
-    except OSError:
-        return '<div class="wordmark">Atom11</div>'
-    return f'<img class="logo" src="data:image/png;base64,{data}" alt="Atom11" width="126" height="28">'
-
+# Atom11 icon, drawn as inline SVG so the report needs no image file.
+ATOM11_ICON = (
+    '<svg class="logo" viewBox="0 0 338 338" width="24" height="24" role="img" aria-label="Atom11">'
+    '<rect width="338" height="338" rx="22" fill="#2250F3"/>'
+    '<circle cx="126" cy="107.5" r="36" fill="#fff"/>'
+    '<path d="M158 154.5A55.75 55.75 0 1 0 158 264Z" fill="#fff"/>'
+    '<path d="M184 265V71.5A64 64 0 0 1 248 135.5V265Z" fill="#fff"/>'
+    '</svg>'
+)
 
 SCHEMA_VERSION = 1
 FORMATS = {'text', 'integer', 'number', 'currency', 'percent', 'percent_value', 'multiplier', 'date'}
@@ -406,7 +399,8 @@ body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 -apple-syst
 .wrap{max-width:1040px;margin:0 auto;padding:24px 16px 56px}
 a{color:var(--cobalt)}
 .cover{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 32px;align-items:end;border-bottom:3px solid var(--cobalt);padding:8px 0 18px;margin-bottom:18px}
-.cover .logo{height:28px;width:auto;display:block;margin-bottom:8px}
+.brand{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.brand .logo{width:24px;height:24px;display:block}
 .wordmark{font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);font-size:12px}
 .cover h1{margin:6px 0 2px;font-size:30px;line-height:1.15;font-weight:600}
 .cover .sub{color:var(--subtle);margin:0}
@@ -682,7 +676,7 @@ def render_html(doc: dict, verified: bool, evidence_files: int) -> str:
              f'<title>{esc(title)} — {esc(account.get("display_name"))}</title>',
              f'<style>{CSS}</style></head><body><div class="wrap">']
     # Cover
-    parts.append(f'<header class="cover"><div>{brand_mark()}')
+    parts.append(f'<header class="cover"><div><div class="brand">{ATOM11_ICON}<div class="wordmark">Atom11</div></div>')
     parts.append(f'<h1 class="serif">{esc(title)}</h1>')
     sub = esc(account.get('display_name'))
     if account.get('system'):

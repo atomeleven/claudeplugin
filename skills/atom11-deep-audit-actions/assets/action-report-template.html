@@ -76,16 +76,10 @@ p { margin: 0; }
   display: flex; align-items: center; gap: 14px;
   padding-bottom: 18px; margin-bottom: 10px; border-bottom: 1px solid var(--line);
 }
-.brand .logo { height: 32px; width: auto; display: block; }
-.brand .logo-dark { display: none; }
+.brand .logo { height: 32px; width: 32px; display: block; }
+.brand-word { font-size: 20px; font-weight: 600; color: var(--ink); line-height: 32px; margin-left: -4px; }
 .brand-name { font-size: 17px; font-weight: 600; color: var(--ink); padding-left: 14px; border-left: 1px solid var(--line); line-height: 32px; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .brand .logo-light { display: none; }
-  :root:not([data-theme="light"]) .brand .logo-dark { display: block; }
-}
-:root[data-theme="dark"] .brand .logo-light { display: none; }
-:root[data-theme="dark"] .brand .logo-dark { display: block; }
-@media (max-width: 420px) { .brand .logo { height: 26px; } .brand-name { font-size: 15px; line-height: 26px; } }
+@media (max-width: 420px) { .brand .logo { height: 26px; width: 26px; } .brand-word { font-size: 17px; line-height: 26px; } .brand-name { font-size: 15px; line-height: 26px; } }
 .meta { color: var(--muted); font-size: 14px; }
 .num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
 

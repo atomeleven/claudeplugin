@@ -58,6 +58,16 @@ claude plugin install atom11@atom11-plugins
 | `atom11-evidence-analyst` | Answers "why did this change?": checks scope, freshness and coverage, reconciles totals, finds causes and builds a review queue | Only if you ask, after preview and approval |
 | `atom11-charts` | Adds one or two charts on top of everyday Atom11 answers when the numbers span dates or items. The full answer with its tables stays below the charts | No |
 
+## Try asking
+
+- "Build my weekly business review for my US account for the last 7 complete days."
+- "Run a deep audit of my Sponsored Ads for the last 30 days, with Take action buttons."
+- "Which products will run out of stock soon, and which campaigns still advertise them?"
+- "Which search terms should become keywords, and which spend money with no orders?"
+- "Rank my campaigns for last month against a 25% target ACOS."
+- "Why did ACOS go up last week compared with the week before?"
+- "Show Ad Spend and Ad Sales by week for the last 3 months as a chart."
+
 If two skills fit a request, name the one you want, for example "Use the
 atom11-report skill for my US account, last 30 days".
 
@@ -102,9 +112,12 @@ README.md
 LICENSE
 ```
 
-## Help
+## Help and policies
 
-Contact your Atom11 team, or visit [atom11.co](https://www.atom11.co/).
+- How the Atom11 connector works: [atom11.co/mcp](https://www.atom11.co/mcp)
+- Get in touch: [atom11.co/schedule-a-demo](https://www.atom11.co/schedule-a-demo), or your Atom11 team
+- [Privacy policy](https://www.atom11.co/legal/privacy-policy)
+- [Terms and conditions](https://www.atom11.co/terms-conditions)
 
 ## License
 

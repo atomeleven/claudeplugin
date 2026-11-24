@@ -1,0 +1,14 @@
+interface:
+  display_name: "Atom11 Report"
+  short_description: "Build or schedule a read-only Atom11 report"
+  brand_color: "#2250F3"
+  default_prompt: "Use $atom11-report to build a weekly business review for one Atom11 account for an exact date range."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "atom11"
+      description: "Atom11 read-only analytics MCP server"
+
+policy:
+  allow_implicit_invocation: true

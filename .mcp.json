@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "atom11": {
+      "type": "http",
+      "url": "https://api.atom11.co/mcp"
+    }
+  }
+}

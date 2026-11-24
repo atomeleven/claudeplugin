@@ -1,0 +1,845 @@
+<title>@@ATOM11_TITLE@@</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one report column. Sections first, then the change queue grouped by category;
+   each change is a row with its own action panel that opens under it. */
+:root {
+  --bg: #f4f6fb;
+  --surface: #ffffff;
+  --ink: #141a2e;
+  --muted: #586079;
+  --line: #dde2ef;
+  --brand: #2250F3;
+  --accent: #2250F3;
+  --accent-ink: #ffffff;
+  --accent-soft: #e9eefe;
+  --warn: #7d5300;
+  --warn-soft: #fff5de;
+  --warn-line: #ecd59e;
+  --ok: #1d6b3a;
+  --ok-soft: #e3f3e8;
+  --bad: #a0281e;
+  --bad-soft: #fbe8e5;
+  --font-ui: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-num: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c1020; --surface: #141a2d; --ink: #e6e9f4; --muted: #9ba3bb; --line: #272f48;
+    --brand: #2250F3; --accent: #7d9bff; --accent-ink: #ffffff; --accent-soft: #18234a;
+    --warn: #efc56c; --warn-soft: #2b2310; --warn-line: #574318;
+    --ok: #82d39d; --ok-soft: #12281a; --bad: #f09a8f; --bad-soft: #341613;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c1020; --surface: #141a2d; --ink: #e6e9f4; --muted: #9ba3bb; --line: #272f48;
+  --brand: #2250F3; --accent: #7d9bff; --accent-ink: #ffffff; --accent-soft: #18234a;
+  --warn: #efc56c; --warn-soft: #2b2310; --warn-line: #574318;
+  --ok: #82d39d; --ok-soft: #12281a; --bad: #f09a8f; --bad-soft: #341613;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.5;
+}
+[hidden] { display: none !important; }
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding-block: 32px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: 32px;
+}
+.eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h1 { font-size: 28px; font-weight: 600; line-height: 1.2; }
+h2 { font-size: 19px; font-weight: 600; }
+h3 { font-size: 15px; font-weight: 600; }
+p { margin: 0; }
+.head { display: grid; gap: 6px; }
+.brand {
+  display: flex; align-items: center; gap: 14px;
+  padding-bottom: 18px; margin-bottom: 10px; border-bottom: 1px solid var(--line);
+}
+.brand .logo { height: 32px; width: auto; display: block; }
+.brand .logo-dark { display: none; }
+.brand-name { font-size: 17px; font-weight: 600; color: var(--ink); padding-left: 14px; border-left: 1px solid var(--line); line-height: 32px; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .brand .logo-light { display: none; }
+  :root:not([data-theme="light"]) .brand .logo-dark { display: block; }
+}
+:root[data-theme="dark"] .brand .logo-light { display: none; }
+:root[data-theme="dark"] .brand .logo-dark { display: block; }
+@media (max-width: 420px) { .brand .logo { height: 26px; } .brand-name { font-size: 15px; line-height: 26px; } }
+.meta { color: var(--muted); font-size: 14px; }
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+
+.notice {
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+}
+.notice strong { font-weight: 600; }
+.notice[data-tone="warn"] { background: var(--warn-soft); border-color: var(--warn-line); color: var(--warn); }
+
+.section { display: grid; gap: 14px; }
+.section > p { max-width: 70ch; }
+.section ul.bullets { margin: 0; padding-left: 20px; display: grid; gap: 6px; max-width: 75ch; }
+.callout {
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.callout[data-tone="warn"] { background: var(--warn-soft); border-color: var(--warn-line); color: var(--warn); }
+.callout[data-tone="bad"] { background: var(--bad-soft); border-color: var(--bad-soft); color: var(--bad); }
+.callout[data-tone="ok"] { background: var(--ok-soft); border-color: var(--ok-soft); color: var(--ok); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+.tile {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.tile .label { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.tile .value { font-size: 20px; font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.tile .note { font-size: 12px; color: var(--muted); }
+
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+td.r, th.r { text-align: right; }
+.caption { font-size: 13px; color: var(--muted); }
+
+.group { display: grid; gap: 10px; }
+.group-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+.group-head .count { color: var(--muted); font-size: 14px; }
+
+.change {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.change-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 16px 24px;
+  align-items: center;
+  padding: 16px 18px;
+}
+.what { display: grid; gap: 6px; min-width: 0; }
+.what .entity { font-weight: 600; font-size: 16px; overflow-wrap: anywhere; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: 12px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+.why { font-size: 14px; color: var(--muted); }
+.move-box { display: grid; gap: 2px; text-align: right; }
+.move-box .move { font-size: 16px; white-space: nowrap; }
+.move-box .delta { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.side { display: grid; gap: 8px; justify-items: end; }
+.state {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.state[data-tone="open"] { background: var(--accent-soft); color: var(--accent); }
+.state[data-tone="ok"] { background: var(--ok-soft); color: var(--ok); }
+.state[data-tone="warn"] { background: var(--warn-soft); color: var(--warn); }
+.state[data-tone="bad"] { background: var(--bad-soft); color: var(--bad); }
+.sources { margin-top: 12px; font-size: 12.5px; color: var(--muted); }
+.table-title { margin: 18px 0 8px; font-size: 15px; }
+.hold {
+  margin: 0 18px 16px; padding: 10px 12px; border-radius: 8px; font-size: 14px; line-height: 1.5;
+  background: var(--warn-soft); color: var(--ink); border-left: 3px solid var(--warn);
+}
+.hold[data-tone="rule"] { background: var(--accent-soft); border-left-color: var(--accent); }
+.hold[data-tone="info"] { background: var(--accent-soft); border-left-color: var(--accent); }
+.hold[data-tone="scope"] { background: var(--warn-soft); border-left-color: var(--warn); }
+.scope-box { border: 1px solid var(--warn-line); border-left: 3px solid var(--warn); background: var(--warn-soft);
+  border-radius: 8px; padding: 12px 14px; display: grid; gap: 8px; }
+.scope-box h3 { color: var(--warn); }
+.scope-box p { font-size: 14px; }
+.hold strong { font-weight: 600; }
+.state[data-tone="wait"] { background: var(--warn-soft); color: var(--warn); border: 1px dashed var(--warn); }
+.state[data-tone="rule"] { background: var(--accent-soft); color: var(--accent); border: 1px dashed var(--accent); }
+.manual { font-size: 13px; color: var(--muted); max-width: 22ch; text-align: right; }
+details.more { border-top: 1px solid var(--line); padding: 10px 18px; font-size: 14px; }
+details.more summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+details.more dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; margin: 10px 0 2px; }
+details.more dt { color: var(--muted); }
+details.more dd { margin: 0; overflow-wrap: anywhere; }
+
+button {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 7px;
+  padding: 8px 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button:disabled { cursor: not-allowed; opacity: 0.55; }
+.btn-primary { background: var(--brand); color: #ffffff; }
+.btn-secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+
+.panel {
+  border-top: 1px solid var(--line);
+  padding: 16px 18px 18px;
+  display: grid;
+  gap: 14px;
+}
+.status-line { font-size: 14px; color: var(--muted); }
+.status-line[data-tone="bad"] { color: var(--bad); }
+.status-line[data-tone="ok"] { color: var(--ok); }
+.status-line[data-tone="warn"] { color: var(--warn); }
+.spinner {
+  display: inline-block;
+  width: 10px; height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  animation: spin 0.8s linear infinite;
+  vertical-align: -1px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+
+.preview-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; align-items: baseline; }
+.preview-head .until { font-size: 13px; color: var(--muted); }
+.facts { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.drift {
+  font-size: 14px;
+  border-radius: 7px;
+  padding: 8px 12px;
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+.warnings {
+  border: 1px solid var(--warn-line);
+  background: var(--warn-soft);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 8px;
+}
+.warnings h3 { color: var(--warn); }
+.warnings ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; }
+.ack { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; }
+.ack input { margin-top: 3px; accent-color: var(--accent); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.actions .note { font-size: 13px; color: var(--muted); }
+.result { display: grid; gap: 8px; font-size: 14px; }
+.result ul { margin: 0; padding-left: 18px; }
+.later { font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.later code { font-family: var(--font-num); font-size: 12px; background: var(--bg); padding: 1px 6px; border-radius: 4px; overflow-wrap: anywhere; }
+.later button { padding: 3px 10px; font-size: 12px; }
+
+@media (max-width: 640px) {
+  .change-row { grid-template-columns: minmax(0, 1fr); }
+  .move-box, .side, .manual { text-align: left; justify-items: start; }
+  h1 { font-size: 24px; }
+}
+.inline-fixes { margin-top: 14px; }
+.index-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto; align-items: center; gap: 6px 14px;
+  padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface);
+}
+.index-row .entity { font-weight: 600; overflow-wrap: anywhere; }
+.index-row .move { white-space: nowrap; }
+.index-row .jump { color: var(--accent); font-size: 14px; white-space: nowrap; text-decoration: none; }
+.index-row .jump:hover { text-decoration: underline; }
+.change:target { outline: 2px solid var(--accent); outline-offset: 2px; }
+.change { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 16px); }
+@media (max-width: 640px) {
+  .index-row { grid-template-columns: minmax(0, 1fr); justify-items: start; }
+}
+</style>
+
+<main class="page">
+@@ATOM11_BODY@@
+</main>
+
+<script type="application/json" id="atom11-actions-data">@@ATOM11_DATA@@</script>
+@@ATOM11_DEMO@@
+<script>
+(function () {
+  "use strict";
+
+  const DATA = JSON.parse(document.getElementById("atom11-actions-data").textContent);
+  const CONFIG = DATA.config;
+  const CHANGES = DATA.changes;
+  const LIVE = CONFIG.mode === "live";
+  const ACCOUNT = CONFIG.account;
+  const session = { scope: null, caps: null, interactionId: null, halted: false };
+  const ctx = {};
+
+  let mcpPromise = null;
+  function getMcp() {
+    if (!mcpPromise) {
+      if (window.__atom11DemoConnector) mcpPromise = Promise.resolve(window.__atom11DemoConnector);
+      else if (window.claude && typeof window.claude.use === "function") mcpPromise = window.claude.use("mcp").catch(() => null);
+      else mcpPromise = Promise.resolve(null);
+    }
+    return mcpPromise;
+  }
+
+  async function call(tool, input) {
+    const mcp = await getMcp();
+    if (!mcp) throw { code: "not_granted" };
+    const res = await mcp.callTool(CONFIG.server, tool, input, { cache: false });
+    let body = res.payload;
+    if (typeof body === "string") {
+      try { body = JSON.parse(body); } catch (e) { /* keep text */ }
+    }
+    if (body && typeof body === "object" && body.result && Object.keys(body).length === 1) body = body.result;
+    return body;
+  }
+
+  function withIx(input) {
+    return session.interactionId ? Object.assign({ interaction_id: session.interactionId }, input) : input;
+  }
+
+  function toolError(err) {
+    const r = (err && err.result) || {};
+    let body = r.structuredContent;
+    let text = null;
+    if (!body && Array.isArray(r.content)) {
+      const t = r.content.find((c) => c.type === "text");
+      if (t) {
+        try { body = JSON.parse(t.text); } catch (e) { text = t.text; }
+      }
+    }
+    const b = body && typeof body === "object" ? body.error || body : {};
+    return { code: b.code || null, message: b.message || text || (err && err.message) || null };
+  }
+
+  function connectorMessage(err) {
+    switch (err && err.code) {
+      case "not_granted":
+      case "capability_disabled":
+      case "capability_removed":
+        return "These buttons work only when the page is open in claude.ai by someone with the Atom11 connector.";
+      case "server_not_connected":
+      case "server_not_found":
+        return "Add the " + CONFIG.server + " connector in claude.ai Settings → Connectors, then try again.";
+      case "needs_reauth":
+        return "Your Atom11 connection has lapsed. Reconnect it in claude.ai Settings → Connectors, then try again.";
+      case "selection_required":
+        return "You have more than one Atom11 connector. Pick one when claude.ai asks, then try again.";
+      case "not_in_manifest":
+      case "approval_required":
+      case "consent_required":
+        return "This page isn't allowed to use Atom11 yet. Allow it when claude.ai asks, or from the page's Permissions menu.";
+      case "blocked_by_policy":
+        return "Your organization's policy blocks this Atom11 action for you.";
+      case "tool_error": {
+        const t = toolError(err);
+        return t.message ? "Atom11 refused: " + t.message : "Atom11 refused this request.";
+      }
+      case "server_unavailable":
+      case "rate_limited":
+        return "Atom11 didn't answer in time. Wait a minute, then try again.";
+      default:
+        return "Something went wrong reaching Atom11" + (err && err.message ? ": " + err.message : ".");
+    }
+  }
+
+  function el(tag, attrs, children) {
+    const n = document.createElement(tag);
+    if (attrs) {
+      for (const [k, v] of Object.entries(attrs)) {
+        if (k === "text") n.textContent = v;
+        else if (k === "className") n.className = v;
+        else if (v !== false && v != null) n.setAttribute(k, v === true ? "" : v);
+      }
+    }
+    (children || []).forEach((c) => c && n.appendChild(typeof c === "string" ? document.createTextNode(c) : c));
+    return n;
+  }
+
+  function money(value, currency) {
+    const n = Number(value);
+    if (!Number.isFinite(n)) return String(value);
+    try { return new Intl.NumberFormat(undefined, { style: "currency", currency: currency || "USD", currencyDisplay: "narrowSymbol" }).format(n); }
+    catch (e) { return n.toFixed(2); }
+  }
+
+  function fieldKind(field) {
+    const f = String(field || "").toLowerCase();
+    if (/bid|budget|cost|cpc/.test(f)) return "money";
+    if (/percent|pct|adjust|placement|modifier/.test(f)) return "percent";
+    return "text";
+  }
+
+  function fieldLabel(field) {
+    const f = String(field || "").replace(/_value$/, "").replace(/_/g, " ").trim();
+    return f ? f.charAt(0).toUpperCase() + f.slice(1) : "Value";
+  }
+
+  function fmtValue(field, value, currency) {
+    if (value === null || value === undefined || value === "") return "—";
+    const kind = fieldKind(field);
+    if (kind === "money" && Number.isFinite(Number(value))) return money(value, currency);
+    if (kind === "percent" && Number.isFinite(Number(value))) return Number(value) + "%";
+    return String(value);
+  }
+
+  function fmtDelta(field, abs, pct, currency) {
+    if (abs === null || abs === undefined || abs === "") return "—";
+    const n = Number(abs);
+    if (!Number.isFinite(n)) return String(abs);
+    const sign = n < 0 ? "−" : n > 0 ? "+" : "";
+    const kind = fieldKind(field);
+    const body = kind === "money" ? money(Math.abs(n), currency) : kind === "percent" ? Math.abs(n) + " pts" : String(Math.abs(n));
+    const p = pct === null || pct === undefined || pct === "" ? NaN : Number(pct);
+    return sign + body + (Number.isFinite(p) ? " (" + (p < 0 ? "−" : p > 0 ? "+" : "") + Math.abs(p).toFixed(1) + "%)" : "");
+  }
+
+  function localTime(iso) {
+    const d = new Date(iso);
+    return isNaN(d) ? String(iso) : d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+  }
+
+  function family(fid) {
+    return ((session.caps && session.caps.families) || []).find((f) => f.family_id === fid) || null;
+  }
+
+  function canUndo(fam) {
+    return !!fam && !fam.irreversible && fam.undo_supported !== "no" && !!family("undo");
+  }
+
+  function undoText(fam) {
+    if (!fam) return null;
+    if (fam.irreversible) return "This change can't be undone.";
+    if (fam.undo_supported === "no") return "Atom11 can't undo this kind of change.";
+    return "Undo is offered here after it's applied, while this page stays open.";
+  }
+
+  function parts(id) {
+    const root = document.querySelector('[data-change="' + id + '"]');
+    return {
+      root,
+      take: root.querySelector('[data-role="take"]'),
+      state: root.querySelector('[data-role="state"]'),
+      panel: root.querySelector('[data-role="panel"]'),
+    };
+  }
+
+  function setState(id, text, tone) {
+    const s = parts(id).state;
+    s.textContent = text;
+    if (tone) s.dataset.tone = tone; else delete s.dataset.tone;
+    // Mirror the status into the change-queue index row, when this change sits under a table above.
+    const m = document.querySelector('[data-index="' + id + '"] [data-role="mirror"]');
+    if (m) {
+      m.textContent = text;
+      if (tone) m.dataset.tone = tone; else delete m.dataset.tone;
+    }
+  }
+
+  function setTake(id, label, enabled) {
+    const t = parts(id).take;
+    t.textContent = label;
+    t.disabled = !enabled || session.halted;
+  }
+
+  function showPanel(id, nodes) {
+    const p = parts(id).panel;
+    p.hidden = false;
+    p.replaceChildren(...nodes);
+  }
+
+  function statusLine(text, tone, busy) {
+    return el("p", { className: "status-line", "data-tone": tone || false }, [busy ? el("span", { className: "spinner", "aria-hidden": "true" }) : null, text]);
+  }
+
+  function showStatus(id, text, tone, busy) {
+    showPanel(id, [statusLine(text, tone, busy)]);
+  }
+
+  function refusalText(res) {
+    if (!res || typeof res !== "object") return "";
+    return res.message ? " " + res.message : res.code ? " (" + res.code + ")" : "";
+  }
+
+  function halt(id, message) {
+    session.halted = true;
+    document.querySelectorAll('[data-role="take"]').forEach((b) => { b.disabled = true; });
+    document.querySelectorAll('.panel button').forEach((b) => { b.disabled = true; });
+    const banner = document.querySelector('[data-role="halt"]');
+    banner.hidden = false;
+    banner.replaceChildren(el("p", { text: "Buttons are paused on this page. " + message }));
+    setState(id, "Check Atom11", "warn");
+    showStatus(id, message, "warn");
+  }
+
+  async function ensureSession(id, kind) {
+    if (session.scope && session.caps) return true;
+    showStatus(id, "Finding " + ACCOUNT.label + " in your Atom11 access…", null, true);
+    const scopes = await call("get_my_data_scopes", {});
+    session.interactionId = session.interactionId || (scopes && scopes.interaction_id) || null;
+    const scope = ((scopes && scopes.scopes) || []).find(
+      (s) => s.scope_type === ACCOUNT.scope_type && s.display_name === ACCOUNT.display_name && s.marketplace === ACCOUNT.marketplace
+    );
+    if (!scope) {
+      fail(id, kind, "Not available", "Your Atom11 login doesn't include " + ACCOUNT.label + ", so you can't act on it from here.");
+      return false;
+    }
+    showStatus(id, "Checking which actions are switched on for this account…", null, true);
+    const caps = await call("get_action_capabilities", withIx({ scope_id: scope.scope_id }));
+    session.scope = scope;
+    session.caps = caps;
+    return true;
+  }
+
+  function fail(id, kind, stateText, message) {
+    setState(id, stateText, "bad");
+    if (kind === "undo") return renderApplied(id, message, "bad", null);
+    showStatus(id, message, "bad");
+    setTake(id, "Take action", true);
+  }
+
+  async function startPreview(id, kind) {
+    if (session.halted) return;
+    const change = CHANGES[id];
+    const c = ctx[id] || (ctx[id] = {});
+    setTake(id, kind === "undo" ? "Applied" : "Getting preview", false);
+    setState(id, kind === "undo" ? "Getting undo preview" : "Getting preview", "open");
+    try {
+      if (!(await ensureSession(id, kind))) return;
+      const familyId = kind === "undo" ? "undo" : change.family_id;
+      const fam = family(familyId);
+      if (!fam) {
+        return fail(id, kind, "Not available", kind === "undo"
+          ? "Undo isn't switched on for " + ACCOUNT.label + " in Atom11."
+          : "This kind of change isn't switched on for " + ACCOUNT.label + " in Atom11.");
+      }
+      if (fam.blocked_reason) return fail(id, kind, "Blocked", "Atom11 has blocked this action: " + fam.blocked_reason);
+      if (kind === "apply") c.family = fam;
+
+      showStatus(id, kind === "undo"
+        ? "Asking Atom11 for an undo preview. Nothing changes on Amazon yet…"
+        : "Asking Atom11 for a preview. Nothing changes on Amazon yet…", null, true);
+      const prop = await call("propose_actions", withIx({
+        scope_id: session.scope.scope_id,
+        family_id: familyId,
+        ad_type: change.ad_type,
+        payload: kind === "undo" ? { proposal_id: c.appliedProposalId } : change.payload,
+        reason: (kind === "undo" ? "Undo from the deep-audit report: " : "From the deep-audit report: ") + change.reason,
+        user_question: (kind === "undo" ? "Undo: " : "Take action: ") + change.label,
+      }));
+      if (!prop || !prop.proposal_id || !prop.diff) {
+        return fail(id, kind, "No preview", "Atom11 didn't return a preview, so this can't go ahead." + refusalText(prop));
+      }
+      c.proposal = prop;
+      c.kind = kind;
+      setState(id, kind === "undo" ? "Undo preview open" : "Preview open", "open");
+      renderPreview(id);
+    } catch (err) {
+      fail(id, kind, kind === "undo" ? "Undo not started" : "Not started", connectorMessage(err));
+    }
+  }
+
+  function renderPreview(id) {
+    const change = CHANGES[id];
+    const c = ctx[id];
+    const undo = c.kind === "undo";
+    const prop = c.proposal;
+    const diff = prop.diff;
+    const field = diff.field;
+    const currency = (diff.totals && diff.totals.currency) || ACCOUNT.currency || "USD";
+    const warnings = prop.warnings || diff.warnings || [];
+
+    const rows = (diff.rows || []).map((r) => el("tr", null, [
+      el("td", { text: r.display_name || "Unnamed item" }),
+      el("td", { className: "r num", text: fmtValue(field, r.before, currency) }),
+      el("td", { className: "r num", text: fmtValue(field, r.after, currency) }),
+      el("td", { className: "r num", text: fmtDelta(field, r.abs_delta, r.pct_delta, currency) }),
+    ]));
+
+    const drifted = undo ? [] : (diff.rows || []).filter((r) => {
+      const was = change.report_before && change.report_before[r.entity_id];
+      if (was == null || r.before == null) return false;
+      const a = Number(was), b = Number(r.before);
+      return Number.isFinite(a) && Number.isFinite(b) ? a !== b : String(was) !== String(r.before);
+    });
+
+    const nodes = [
+      el("div", { className: "preview-head" }, [
+        el("h3", { text: undo ? "Atom11 undo preview" : "Atom11 preview" }),
+        el("span", { className: "until", text: "Valid until " + localTime(prop.expires_at || diff.expires_at) }),
+      ]),
+      el("div", { className: "table-wrap" }, [
+        el("table", null, [
+          el("thead", null, [el("tr", null, [
+            el("th", { text: "Item" }),
+            el("th", { className: "r", text: fieldLabel(field) + " now" }),
+            el("th", { className: "r", text: undo ? "Back to" : "New" }),
+            el("th", { className: "r", text: "Change" }),
+          ])]),
+          el("tbody", null, rows),
+        ]),
+      ]),
+    ];
+
+    if (drifted.length) {
+      nodes.push(el("p", { className: "drift", text: "This has changed since the report was made. Check the new value still makes sense before you apply it." }));
+    }
+
+    const facts = [diff.freshness, undo ? "Undo puts back the value Atom11 recorded before the change." : undoText(c.family)];
+    if ((prop.superseded_proposal_ids || []).length) facts.push("This replaces an earlier open preview of the same change.");
+    nodes.push(el("div", { className: "facts" }, facts.filter(Boolean).map((t) => el("p", { text: t }))));
+
+    // Rule-level change: say plainly who it affects, and require its own tick.
+    let scopeAck = null;
+    if (!undo && change.scope_notice) {
+      scopeAck = el("input", { type: "checkbox", id: "scope-" + id });
+      nodes.push(el("div", { className: "scope-box", role: "group", "aria-labelledby": "scope-h-" + id }, [
+        el("h3", { id: "scope-h-" + id, text: "This changes an automation rule" }),
+        el("p", { text: change.scope_notice }),
+        el("label", { className: "ack", for: "scope-" + id }, [scopeAck, "I understand which campaigns this affects."]),
+      ]));
+    }
+
+    let ack = null;
+    if (warnings.length) {
+      ack = el("input", { type: "checkbox", id: "ack-" + id });
+      nodes.push(el("div", { className: "warnings", role: "group", "aria-labelledby": "warn-h-" + id }, [
+        el("h3", { id: "warn-h-" + id, text: warnings.length === 1 ? "1 warning from Atom11" : warnings.length + " warnings from Atom11" }),
+        el("ul", null, warnings.map((w) => el("li", { text: w.message || w.kind || "Unnamed warning" }))),
+        el("label", { className: "ack", for: "ack-" + id }, [ack, "I've read these warnings and still want this change."]),
+      ]));
+    }
+
+    const yes = el("button", { type: "button", className: "btn-primary", text: undo ? "Yes, undo this change" : "Yes, apply this change" });
+    const no = el("button", { type: "button", className: "btn-secondary", text: "No, cancel preview" });
+    const note = el("span", { className: "note", text: LIVE ? "" : "Applying is switched off on this page." });
+    const sync = () => { yes.disabled = session.halted || !LIVE || (ack && !ack.checked) || (scopeAck && !scopeAck.checked); };
+    if (ack) ack.addEventListener("change", sync);
+    if (scopeAck) scopeAck.addEventListener("change", sync);
+    sync();
+    yes.addEventListener("click", () => confirmProposal(id, warnings.length > 0));
+    no.addEventListener("click", () => cancelPreview(id));
+    nodes.push(el("div", { className: "actions" }, [yes, no, note]));
+
+    setTake(id, undo ? "Applied" : "Preview open", false);
+    showPanel(id, nodes);
+  }
+
+  async function cancelPreview(id) {
+    const change = CHANGES[id];
+    const c = ctx[id];
+    const undo = c.kind === "undo";
+    const until = localTime(c.proposal.expires_at);
+    showStatus(id, "Cancelling the preview…", null, true);
+    let msg;
+    let tone = "ok";
+    try {
+      await call("cancel_actions", withIx({ proposal_id: c.proposal.proposal_id, user_question: "No, cancel preview: " + change.label }));
+      msg = undo ? "Undo preview cancelled. The change stays applied." : "Preview cancelled. Nothing was changed on Amazon.";
+    } catch (err) {
+      tone = "warn";
+      msg = "Couldn't cancel the preview (" + connectorMessage(err) + ") Nothing was changed on Amazon, and the preview expires on its own at " + until + ".";
+    }
+    c.proposal = null;
+    if (undo) {
+      setState(id, "Applied", "ok");
+      return renderApplied(id, msg, tone, null);
+    }
+    setState(id, tone === "ok" ? "Cancelled" : "Cancel failed", tone === "ok" ? null : "warn");
+    showStatus(id, msg, tone);
+    setTake(id, "Take action", true);
+  }
+
+  async function confirmProposal(id, hasWarnings) {
+    if (!LIVE || session.halted) return;
+    const change = CHANGES[id];
+    const c = ctx[id];
+    const undo = c.kind === "undo";
+    const expires = new Date(c.proposal.expires_at);
+    if (!isNaN(expires) && Date.now() > expires.getTime()) {
+      setState(id, "Preview expired", "warn");
+      if (undo) return renderApplied(id, "The undo preview expired. Click Undo for a fresh one.", "warn", null);
+      showStatus(id, "This preview expired. Click Take action for a fresh one.", "warn");
+      return setTake(id, "Take action", true);
+    }
+    setState(id, undo ? "Undoing" : "Applying", "open");
+    showStatus(id, undo ? "Undoing through Atom11…" : "Applying through Atom11…", null, true);
+    c.ack = hasWarnings;
+    try {
+      const r = await call("confirm_actions", withIx({
+        proposal_id: c.proposal.proposal_id,
+        acknowledge_warnings: hasWarnings,
+        user_question: (undo ? "Yes, undo: " : "Yes, apply: ") + change.label,
+      }));
+      handleOutcome(id, r);
+    } catch (err) {
+      if (err && err.code === "tool_error") return handleRefusal(id, toolError(err));
+      halt(id, "We couldn't tell whether the " + (undo ? "undo" : "change") + " ran. Check History in Atom11 before making more changes from this page.");
+    }
+  }
+
+  function handleRefusal(id, refusal) {
+    const c = ctx[id];
+    const undo = c.kind === "undo";
+    const code = refusal.code;
+    let msg;
+    if (code === "stale_preview" || code === "proposal_expired") {
+      msg = "The value changed or the preview expired before it ran. Nothing was applied. Ask for a fresh preview.";
+    } else if (code === "proposal_in_flight") {
+      return renderRunning(id);
+    } else {
+      msg = "Atom11 refused: " + String(refusal.message || code || "no reason given").replace(/[.\s]+$/, "") + ". Nothing was applied.";
+    }
+    setState(id, "Not applied", "warn");
+    if (undo) return renderApplied(id, msg, "warn", null);
+    showStatus(id, msg, "warn");
+    setTake(id, "Take action", true);
+  }
+
+  function perEntityList(r) {
+    const per = (r && r.per_entity) || [];
+    if (!per.length) return null;
+    return el("ul", null, per.map((e) => el("li", {
+      text: (e.display_name || e.name || "Item") + ": " + String(e.status || "unknown").toLowerCase() + (e.message || e.error ? " — " + (e.message || e.error) : ""),
+    })));
+  }
+
+  function handleOutcome(id, r) {
+    const c = ctx[id];
+    const undo = c.kind === "undo";
+    if (r && !r.status && r.code) return handleRefusal(id, { code: r.code, message: r.message });
+    const status = String((r && r.status) || "").toUpperCase();
+
+    if ((r && r.outcome_unknown) || status === "OUTCOME_UNKNOWN") {
+      return halt(id, "Atom11 can't tell whether this " + (undo ? "undo" : "change") + " reached Amazon. Check History in Atom11 before making more changes from this page.");
+    }
+    if (status === "STARTED" || status === "PROPOSAL_IN_FLIGHT") return renderRunning(id);
+
+    if (status === "EXECUTED" || status === "SUCCESS" || status === "SUCCEEDED" || status === "COMPLETED" || status === "PARTIAL") {
+      const partial = status === "PARTIAL";
+      if (undo) {
+        c.appliedProposalId = partial ? c.appliedProposalId : null;
+        setState(id, partial ? "Partly undone" : "Undone", partial ? "warn" : "ok");
+        const nodes = [
+          statusLine(partial ? "Partly undone. Some items were restored and some were not:" : "Undone. Atom11 put back the value it recorded before the change.", partial ? "warn" : "ok"),
+          perEntityList(r),
+        ];
+        showPanel(id, [el("div", { className: "result" }, nodes)]);
+        return setTake(id, "Take action", !partial);
+      }
+      c.appliedProposalId = c.proposal.proposal_id;
+      setState(id, partial ? "Partly applied" : "Applied", partial ? "warn" : "ok");
+      setTake(id, "Applied", false);
+      return renderApplied(id, partial
+        ? "Partly applied. Some items went through and some did not:"
+        : (/^(autorules_|dayparting_)/.test((CHANGES[id] || {}).family_id || "")
+            ? "Applied. Atom11 saved the change to the rule. Nothing is sent to Amazon directly; the rule acts on it from its next run or time slot."
+            : "Applied. Atom11 recorded the change; Amazon's own readback arrives with the next data sync."), partial ? "warn" : "ok", r);
+    }
+
+    if (status === "FAILED") {
+      setState(id, undo ? "Undo failed" : "Failed", "bad");
+      if (undo) return renderApplied(id, "The undo failed. The change is still applied.", "bad", r);
+      showPanel(id, [el("div", { className: "result" }, [statusLine("The change failed. Nothing was applied for the items below.", "bad"), perEntityList(r)])]);
+      return setTake(id, "Take action", true);
+    }
+
+    halt(id, "Atom11 returned a result this page doesn't recognise (" + (status || "no status") + "). Check History in Atom11 before making more changes from this page.");
+  }
+
+  function renderRunning(id) {
+    const c = ctx[id];
+    setState(id, "Running", "open");
+    const check = el("button", { type: "button", className: "btn-secondary", text: "Check result" });
+    check.addEventListener("click", async () => {
+      showStatus(id, "Reading the result from Atom11…", null, true);
+      try {
+        const r = await call("confirm_actions", withIx({ proposal_id: c.proposal.proposal_id, acknowledge_warnings: !!c.ack }));
+        handleOutcome(id, r);
+      } catch (err) {
+        halt(id, "Couldn't read the result. Check History in Atom11 before making more changes from this page.");
+      }
+    });
+    showPanel(id, [el("div", { className: "result" }, [
+      statusLine("Started, not finished yet. Check the result in about a minute."),
+      el("div", { className: "actions" }, [check]),
+    ])]);
+  }
+
+  function renderApplied(id, message, tone, result) {
+    const c = ctx[id];
+    const nodes = [statusLine(message, tone)];
+    const list = perEntityList(result);
+    if (list) nodes.push(list);
+    if (c.appliedProposalId && canUndo(c.family)) {
+      const undoBtn = el("button", { type: "button", className: "btn-secondary", text: "Undo this change" });
+      undoBtn.disabled = session.halted;
+      undoBtn.addEventListener("click", () => startPreview(id, "undo"));
+      nodes.push(el("div", { className: "actions" }, [undoBtn, el("span", { className: "note", text: "Undo shows Atom11's preview first. It stays here while this page is open." })]));
+      const code = el("code", { text: c.appliedProposalId });
+      const copy = el("button", { type: "button", className: "btn-secondary", text: "Copy" });
+      copy.addEventListener("click", () => {
+        const done = () => { copy.textContent = "Copied"; };
+        const pick = () => { const sel = window.getSelection(); const range = document.createRange(); range.selectNodeContents(code); sel.removeAllRanges(); sel.addRange(range); };
+        try { navigator.clipboard.writeText(c.appliedProposalId).then(done, pick); } catch (e) { pick(); }
+      });
+      nodes.push(el("p", { className: "later" }, ["After you close this page, ask Claude to undo Atom11 change", code, copy, "(within 21 days)."]));
+    } else if (c.appliedProposalId && c.family) {
+      nodes.push(el("p", { className: "later", text: undoText(c.family) }));
+    }
+    showPanel(id, [el("div", { className: "result" }, nodes)]);
+  }
+
+  document.querySelectorAll("[data-change]").forEach((node) => {
+    const id = node.getAttribute("data-change");
+    const take = node.querySelector('[data-role="take"]');
+    if (take) take.addEventListener("click", () => startPreview(id, "apply"));
+  });
+
+  getMcp().then((mcp) => {
+    if (mcp) return;
+    document.querySelectorAll('[data-role="take"]').forEach((b) => { b.disabled = true; });
+    const banner = document.querySelector('[data-role="unavailable"]');
+    if (banner) banner.hidden = false;
+  });
+})();
+</script>

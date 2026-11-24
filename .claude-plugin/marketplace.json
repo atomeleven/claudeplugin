@@ -1,0 +1,19 @@
+{
+  "name": "atom11-plugins",
+  "owner": {
+    "name": "Atom11",
+    "url": "https://www.atom11.co/"
+  },
+  "metadata": {
+    "description": "Atom11 plugin for Claude: Amazon Ads and retail skills that run on your Atom11 data."
+  },
+  "plugins": [
+    {
+      "name": "atom11",
+      "source": "./",
+      "description": "Amazon Ads and retail skills that run on your Atom11 data: reports, audits, charts and approved campaign changes.",
+      "category": "marketing",
+      "tags": ["amazon-ads", "advertising", "retail", "reporting", "ppc"]
+    }
+  ]
+}

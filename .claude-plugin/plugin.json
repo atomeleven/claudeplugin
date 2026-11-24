@@ -1,0 +1,13 @@
+{
+  "name": "atom11",
+  "displayName": "Atom11",
+  "version": "1.0.1",
+  "description": "Amazon Ads and retail skills that run on your Atom11 data: reports, audits, charts and approved campaign changes.",
+  "author": {
+    "name": "Atom11",
+    "url": "https://www.atom11.co/"
+  },
+  "homepage": "https://www.atom11.co/",
+  "repository": "https://github.com/atomeleven/claudeplugin",
+  "keywords": ["amazon-ads", "advertising", "retail", "reporting", "ppc"]
+}

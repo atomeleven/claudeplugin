@@ -1,0 +1,40 @@
+{
+  "profile_version": 1,
+  "name": "Atom11 Demo Storefront US — weekly",
+  "client": "Atom11 Demo",
+  "prepared_for": "Brand team",
+  "request": "Weekly business review for Atom11 Demo Storefront US: account performance, campaign movers, campaign review, top search terms, wasted spend, restock risks.",
+  "account": {
+    "display_name": "Atom11 Demo Storefront US",
+    "system": "ads_profile",
+    "timezone": "America/Los_Angeles"
+  },
+  "dsp": null,
+  "report_type": "weekly",
+  "cadence": {
+    "frequency": "weekly",
+    "window": "last_complete_week",
+    "run_day": "Tuesday",
+    "run_time": "08:30",
+    "freshness_policy": "shift_to_complete"
+  },
+  "modules": {
+    "include": [],
+    "exclude": ["recommendations"]
+  },
+  "options": {
+    "targets": {"acos": 0.25, "tacos": null},
+    "wasted_spend_min_clicks": 5,
+    "wasted_spend_click_operator": "gte",
+    "campaign_limit": 10,
+    "search_term_limit": 10,
+    "max_days_of_cover": 30,
+    "reorder_target_days": 15,
+    "missing_target_policy": "account_average",
+    "module_params": {
+      "top_search_terms": {"rank_by": "orders"}
+    }
+  },
+  "focus": ["Q4 launch campaigns", "Brand defence terms"],
+  "output": {"format": "html", "language": "en", "filename_prefix": "atom11-demo-weekly"}
+}

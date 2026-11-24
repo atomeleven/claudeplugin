@@ -1,0 +1,18 @@
+# System files (the Claude directory refuses plugins that contain them)
+.DS_Store
+Thumbs.db
+desktop.ini
+__MACOSX/
+
+# Python leftovers
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Packaged copies and maintainer-only folders stay out of the plugin
+dist/
+*.zip
+*.skill
+skills/*/tests/
+skills/*/evals/
+skills/*/preview/

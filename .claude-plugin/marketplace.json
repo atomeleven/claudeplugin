@@ -11,7 +11,7 @@
     {
       "name": "atom11",
       "source": "./",
-      "description": "Amazon Ads and retail skills that run on your Atom11 data: reports, audits, charts and approved campaign changes.",
+      "description": "Amazon Ads and retail skills that run on your Atom11 data: reports, audits, inventory and search-term reviews, and campaign changes you approve.",
       "category": "marketing",
       "tags": ["amazon-ads", "advertising", "retail", "reporting", "ppc"]
     }

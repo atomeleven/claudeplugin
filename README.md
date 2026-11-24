@@ -3,7 +3,7 @@
 # Atom11 plugin for Claude
 
 Skills for Claude that work on your Amazon advertising and retail data through the
-Atom11 connector. Ask for a report, an audit or a chart in plain words, and Claude
+Atom11 connector. Ask for a report, an audit or a review in plain words, and Claude
 builds it from your own Atom11 numbers. When you ask for a change to a campaign,
 Claude shows the full preview first and applies it only after you say yes.
 
@@ -55,8 +55,8 @@ claude plugin install atom11@atom11-plugins
 | `atom11-inventory-risk-review` | Restock priorities, plus campaigns and ad groups advertising out-of-stock or low-stock products, as an HTML brief | No |
 | `atom11-search-term-opportunities` | Search terms worth harvesting and zero-order terms to review as negatives, as an HTML brief | No |
 | `atom11-campaign-performance-review` | Ranks campaigns with target-ACOS flags and period movement, as an HTML brief | No |
-| `atom11-charts` | Adds one or two charts on top of everyday Atom11 answers when the numbers span dates or items. The full answer with its tables stays below the charts | No |
-| `atom11-approved-actions` | Makes bid, budget, status, negative and undo changes: full preview first, then your approval | Yes, after preview and approval |
+| `atom11-evidence-analyst` | Answers "why did this change?": checks scope, freshness and coverage, reconciles totals, finds causes and builds a review queue | Only if you ask, after preview and approval |
+| `amazon-ads-takeover-operator` | Takes over an inherited Ads account: verified history, master audit, change journal, monitoring plan and exception queue | Only if you ask, after preview and approval |
 
 If two skills fit a request, name the one you want, for example "Use the
 atom11-report skill for my US account, last 30 days".
@@ -77,8 +77,9 @@ Every HTML page these skills build carries the Atom11 logo and the Atom11 blue.
   Claude runs them in its own code-execution sandbox to check numbers and build
   HTML reports. They use only the Python standard library and make no network
   calls.
-- **Logo.** The scripts read `assets/atom11-logo.png` from the skill's own folder
-  and place it inside the HTML report, so the report stays one file.
+- **Logo.** The report scripts read the Atom11 logo image from the skill's own
+  assets folder and place it inside the HTML report, so the report stays one
+  file. The image is only shown, never run.
 - **Changes to your ad account.** Reading is the default. A change is made only
   through Atom11's preview-then-confirm flow, after you have seen the full
   preview and approved it.
@@ -108,4 +109,4 @@ Contact your Atom11 team, or visit [atom11.co](https://www.atom11.co/).
 
 ## License
 
-Copyright (c) 2026 Atom11. All rights reserved. See [LICENSE](LICENSE).
+Copyright (c) 2026 Atom11. All rights reserved. This is not open-source software. See [LICENSE](LICENSE).

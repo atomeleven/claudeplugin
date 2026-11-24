@@ -1,8 +1,3 @@
----
-name: atom11-approved-actions
-description: Handle Atom11 Sponsored Ads changes only with a preview and fresh human approval. Use for supported bid, budget, status, negative or undo requests. Not for automatic changes, DSP writes or rule edits.
----
-
 # Atom11 actions with human approval
 
 Use this skill for an explicit request to preview, perform, cancel or undo a
@@ -10,8 +5,8 @@ supported Atom11 Sponsored Ads change. Analysis and recommendations alone do
 not authorize execution. Work ends at a preview until a human replies with
 approval for that exact preview.
 
-Read [the write contract](references/write-contract.md) before using action
-tools. Use [the local journal](assets/write-journal.csv) to preserve what was
+Read [the write contract](write-contract.md) before using action
+tools. Use [the local journal](../assets/write-journal.csv) to preserve what was
 requested, shown, approved, submitted and returned.
 
 ## Approval rule
@@ -144,7 +139,7 @@ Read the returned `status`, `per_entity`, `audit_verified`,
 `history_ids`, `outcome_unknown` and any `code`/`message` together.
 Report successful, failed and unresolved entities separately. An
 `audit_verified` flag alone is insufficient: it can accompany a verified
-failure. Use [the outcome table](references/write-contract.md#outcomes).
+failure. Use [the outcome table](write-contract.md#outcomes).
 
 An audit-confirmed result proves what Atom11 recorded; it is not live
 native Amazon saved-state readback. Record native readback only from an
@@ -192,7 +187,7 @@ permissions.
 Respect any governing read-only restriction. A request for a report alone
 does not authorize preparing a stored proposal or executing a change.
 
-The preview/approval boundary here applies to Claude, Codex and any other
+The preview/approval boundary here applies to Claude and any other
 LLM using these instructions. The current server uses client-mediated
 confirmation: this file is not a server-enforced guarantee that a human
 approved. Do not describe it as such or bypass the confirmation step.

@@ -1,0 +1,2 @@
+priority,decision,platform,entity_type,entity_name,stable_id,current_state,proposed_state,evidence_start,evidence_end,latest_complete_date,root_cause,evidence,expected_benefit,risk,confidence,destination_state,owner,due_or_review_date,approval_required,approval_status,execution_status,first_review,hard_stop,rollback,native_readback_at,outcome
+P1,Repair,Amazon Ads,,,,,,,,,,,,,,,,,yes,not requested,planned,,,,,

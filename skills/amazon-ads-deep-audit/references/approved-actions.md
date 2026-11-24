@@ -187,7 +187,7 @@ permissions.
 Respect any governing read-only restriction. A request for a report alone
 does not authorize preparing a stored proposal or executing a change.
 
-The preview/approval boundary here applies to Claude, Codex and any other
+The preview/approval boundary here applies to Claude and any other
 LLM using these instructions. The current server uses client-mediated
 confirmation: this file is not a server-enforced guarantee that a human
 approved. Do not describe it as such or bypass the confirmation step.

@@ -1,18 +1,13 @@
 {
   "name": "atom11",
   "displayName": "Atom11",
-  "version": "1.0.4",
-  "description": "Run your Amazon Ads and retail work from a conversation, on your own Atom11 data.\n\nAsk in plain words and Claude builds the answer from your Atom11 numbers: weekly and monthly business reviews, full account audits, campaign rankings against your target ACOS, search terms to harvest or block, restock and out-of-stock risks, and charts of any metric over time. Reports come as clean HTML pages you can save or share.\n\nIt works across Sponsored Products, Sponsored Brands, Sponsored Display, DSP and retail data. Every number comes from your Atom11 account, and each skill says when data is missing, late or only partly covered.\n\nReading is the default. When you ask for a change to a bid, budget, status or negative, Claude shows the full preview first and applies it only after you say yes. The deep audit page puts a Take action button beside each recommended change, with Undo where Atom11 supports it.\n\nNeeds an Atom11 account and the Atom11 connector.",
+  "version": "1.0.5",
+  "description": "Run your Amazon Ads and retail work from a conversation, on your own Atom11 data. Ask in plain words for weekly and monthly business reviews, full account audits, campaign rankings against target ACOS, search terms to harvest or block, restock risks and charts. Reports come as clean HTML pages. Reading is the default: a change to a bid, budget, status or negative is applied only after you see the full preview and say yes. Needs an Atom11 account and the Atom11 connector.",
   "author": {
     "name": "Atom11",
     "url": "https://www.atom11.co/"
   },
-  "icon": "./assets/atom11-icon.svg",
   "homepage": "https://www.atom11.co/mcp",
-  "documentationUrl": "https://www.atom11.co/mcp",
-  "supportUrl": "https://www.atom11.co/schedule-a-demo",
-  "privacyPolicyUrl": "https://www.atom11.co/legal/privacy-policy",
-  "termsOfServiceUrl": "https://www.atom11.co/terms-conditions",
   "repository": "https://github.com/atomeleven/claudeplugin",
   "license": "LicenseRef-Proprietary",
   "keywords": [

@@ -1,6 +1,6 @@
 ---
 name: atom11-campaign-performance-review
-description: "Rank Amazon campaigns and review recorded target ACOS and supported period movement through Atom11. Produce a read-only campaign performance brief."
+description: "Ranks your Amazon ad campaigns and shows which ones are doing well and which need attention. Ask something like rank my campaigns for last month, and name the account. It asks for the date range (7, 14 or 30 days are offered) and lets you choose to rank by ad sales or ad spend, how many campaigns to show (10 by default) and what to do with campaigns that have no target ACOS. For each campaign you see spend, sales and ACOS, a flag when it is over the target ACOS set for it, and a comparison with the same number of days just before, so you can see which campaigns grew, dropped or started spending a lot more. You get a clean HTML report with headline numbers, a campaign chart and tables you can save or share. It never invents a target and it is read-only: it changes nothing in your account."
 ---
 
 # Atom11 Campaign Performance Review

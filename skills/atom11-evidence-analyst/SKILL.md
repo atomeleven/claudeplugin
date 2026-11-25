@@ -1,6 +1,6 @@
 ---
 name: atom11-evidence-analyst
-description: Analyze Amazon Ads with Atom11. Verify scope, freshness and coverage, reconcile totals, find causes and build a review queue. Changes only on request, after full preview and fresh approval.
+description: "A careful analyst for your Amazon Ads numbers that explains why something happened, with proof. Ask questions like why did ACOS go up last week, where did sales drop, or are these numbers right, and name the account and dates. Before answering, it checks that the right account and dates are used, that the data is complete and up to date, and that the totals add up, and it tells you about any gaps. Then it digs into campaigns, search terms, placements and products to find the real cause, keeping what the data shows apart from what is only likely. You get a clear answer with the numbers behind it, a list of things to review next and suggested changes where they make sense. Reading is the default: it changes something in your account only when you ask for that exact change, see the full preview with every warning, and approve it in a new message."
 ---
 
 # Atom11 Evidence Analyst

@@ -1,6 +1,6 @@
 ---
 name: atom11-inventory-risk-review
-description: "Review current inventory risk and associated advertising exposure through Atom11. Produce a read-only restock, zero-stock and low-stock decision brief."
+description: "Finds stock problems that hurt your sales and waste ad spend. Ask about stock, restocking, or products that are out of stock or running low, and name the account. It shows three things: products closest to running out, with how many days of stock are left and how much to reorder; campaigns still advertising products that are already out of stock; and ad groups advertising products with only a few days of stock left. It uses current stock levels, so no date range is needed. You can change how many days of stock count as low (30 by default), the reorder target (15 days) and how many products to list (15). You get a clean HTML report with headline numbers, a days-of-stock chart and tables, so you can reorder in time and pause or fix ads on products you cannot sell. It is read-only: it changes nothing in your account."
 ---
 
 # Atom11 Inventory Risk Review

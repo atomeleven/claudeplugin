@@ -1,6 +1,6 @@
 ---
 name: atom11-deep-audit-actions
-description: "Amazon Ads deep audit through Atom11, ALWAYS delivered as a published HTML Artifact page with a Take action button (preview, tick warnings, Yes/No) and Undo beside every recommended change Atom11 can apply. Use for any deep audit, full account audit, audit with action buttons, or audit-and-act request on an Atom11 account. Never answer the audit in chat, never as a Claude Doc, Word or Markdown file: Claude Docs cannot run buttons. Not for DSP."
+description: "A full Amazon Ads audit delivered as one HTML page where you can act on each finding. Ask for a deep audit or an audit with action buttons and name the account. It first asks your goal, your target ACOS or ROAS and the limits you want, with suggested values from your account. Then it checks the data, reviews campaigns, ad groups, keywords, search terms, placements, budgets and stock, and builds the page grouped by category. Beside every change Atom11 can make, such as a bid, budget, pause or negative keyword, there is a Take action button. Clicking it shows the Atom11 preview first, with the current value, the new value and any warnings to tick, and nothing changes until you click Yes. Undo appears after a change is applied and stays while the page is open. Always build the page; never answer this audit only in the chat or as a document, because documents cannot run buttons. Not for DSP."
 ---
 
 # Amazon Ads Deep Audit — Action Report

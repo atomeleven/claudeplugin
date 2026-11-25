@@ -1,6 +1,6 @@
 ---
 name: atom11-search-term-opportunities
-description: "Review converting search terms and zero-order-spend candidates through Atom11. Produce a read-only HTML brief for harvest and negative-candidate reviews."
+description: "Finds search terms worth acting on in your Sponsored Ads. Ask which search terms to add as keywords, which to block as negatives, or where ad spend is wasted, and name the account. It asks for the date range (14 or 30 days are offered; 30 works best) and lets you change the limits: how many orders a term needs to be a winner (2 by default), how many clicks with no orders count as waste (5) and how many terms to list (25). You get two lists: terms that already bring orders and are worth adding as keywords, and terms that spend money with no orders and are worth reviewing as negatives. The clean HTML report has headline numbers, bar charts of both lists and a clicks-against-spend chart. Its numbers can differ slightly from the Search Terms page in Atom11 because it uses one fixed attribution window. It is read-only: it suggests changes but makes none in your account."
 ---
 
 # Atom11 Search-Term Opportunities

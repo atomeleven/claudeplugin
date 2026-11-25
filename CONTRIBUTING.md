@@ -80,6 +80,10 @@ LICENSE
 - Start every skill name with `atom11-`, for example `atom11-inventory-risk-review`.
 - The folder name and the `name` in the `SKILL.md` frontmatter are exactly the same:
   lowercase letters, digits and hyphens, at most 64 characters.
-- The frontmatter has only `name` and `description`, and `description` is a single
-  line of at most 1,024 characters.
+- The frontmatter has only `name` and `description`.
+- Write the `description` as a full overview in simple words, so a user knows the skill
+  before using it: what it does, how to ask for it, what it asks the user, what the user
+  gets, and whether it can change the account. Claude shows it when someone opens the
+  skill, and uses it to decide when to run the skill. Use most of the limit: one line of
+  at most 1,024 characters.
 - Keep `SKILL.md` under 500 lines. Move long detail into `references/`.

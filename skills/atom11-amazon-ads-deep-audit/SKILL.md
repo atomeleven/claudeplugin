@@ -1,6 +1,6 @@
 ---
 name: atom11-amazon-ads-deep-audit
-description: End-to-end Amazon Ads audit with Atom11 covering scope, freshness, active spend, retail readiness, causal routes and approval-ready changes. Use for full audits, event readiness or major drops.
+description: "A complete health check of your Amazon Ads account, written in the chat. Ask for a full audit, an audit before a big sales event, or an audit after results dropped, and name the account and dates. It first confirms the account, marketplace, currency and the exact dates, and checks that the data is complete and up to date. Then it looks at everything: campaigns, ad groups, keywords, search terms, placements, products, budgets and stock, and makes sure every dollar of active spend is counted. It explains what caused big changes and sorts each campaign into scale, keep, fix, reduce or pause. You get a clear summary, the data gaps it found, and a numbered list of suggested changes with the current value, the new value and the reason for each. Nothing changes in your account unless you ask for a change and approve its full preview. For the same audit as a page with Take action buttons, use atom11-deep-audit-actions."
 ---
 
 # Amazon Ads Deep Audit — Shareable

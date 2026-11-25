@@ -77,6 +77,7 @@ LICENSE
 
 ## 5. Keep each skill valid
 
+- Start every skill name with `atom11-`, for example `atom11-inventory-risk-review`.
 - The folder name and the `name` in the `SKILL.md` frontmatter are exactly the same:
   lowercase letters, digits and hyphens, at most 64 characters.
 - The frontmatter has only `name` and `description`, and `description` is a single

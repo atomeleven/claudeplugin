@@ -1,5 +1,5 @@
 ---
-name: amazon-ads-deep-audit
+name: atom11-amazon-ads-deep-audit
 description: End-to-end Amazon Ads audit with Atom11 covering scope, freshness, active spend, retail readiness, causal routes and approval-ready changes. Use for full audits, event readiness or major drops.
 ---
 

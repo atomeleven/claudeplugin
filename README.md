@@ -50,7 +50,7 @@ claude plugin install atom11@atom11-plugins
 | Skill | What it does | Changes your account? |
 |---|---|---|
 | `atom11-deep-audit-actions` | Full Amazon Ads audit as an HTML page, with a Take action button beside each recommended change and Undo after a change is applied | Yes, only the change you click, after its preview and your Yes |
-| `amazon-ads-deep-audit` | The same end-to-end audit in the chat: scope, data freshness, spend coverage, retail readiness, causes and an approval-ready change list | Only if you ask, after preview and approval |
+| `atom11-amazon-ads-deep-audit` | The same end-to-end audit in the chat: scope, data freshness, spend coverage, retail readiness, causes and an approval-ready change list | Only if you ask, after preview and approval |
 | `atom11-report` | Any report as an HTML brief: weekly or monthly business review, campaigns, search terms, products, inventory, DSP, placements, dayparting, SQP and more. Can run on a schedule | No |
 | `atom11-inventory-risk-review` | Restock priorities, plus campaigns and ad groups advertising out-of-stock or low-stock products, as an HTML brief | No |
 | `atom11-search-term-opportunities` | Search terms worth harvesting and zero-order terms to review as negatives, as an HTML brief | No |

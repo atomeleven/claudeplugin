@@ -23,7 +23,7 @@ Set the version only in `.claude-plugin/plugin.json`, never in `marketplace.json
 
 A check on GitHub (**Version check**) runs on every pull request into `master`. It shows
 a red ❌ when the version is not higher than the one on `master`. It does not block the
-merge, so look at it before you merge.
+merge, so look at it before you merge..
 
 ## 2. Work on a branch, merge by pull request
 

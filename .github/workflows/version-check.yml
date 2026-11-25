@@ -1,0 +1,31 @@
+name: Version check
+
+on:
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  version:
+    name: Version raised
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compare plugin.json version with master
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          new=$(jq -r .version .claude-plugin/plugin.json)
+          old=$(git show "origin/$BASE_REF:.claude-plugin/plugin.json" | jq -r .version)
+          echo "master: $old   this pull request: $new"
+          top=$(printf '%s\n%s\n' "$old" "$new" | sort -V | tail -1)
+          if [ "$old" = "$new" ] || [ "$top" != "$new" ]; then
+            echo "::error file=.claude-plugin/plugin.json::Raise version in .claude-plugin/plugin.json (master has $old). Without it, clients keep the old copy."
+            exit 1
+          fi
+          echo "Version raised from $old to $new."

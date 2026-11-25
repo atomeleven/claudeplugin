@@ -1,7 +1,7 @@
 {
   "name": "atom11",
   "displayName": "Atom11",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Run your Amazon Ads and retail work from a conversation, on your own Atom11 data. Ask in plain words for weekly and monthly business reviews, full account audits, campaign rankings against target ACOS, search terms to harvest or block, restock risks and charts. Reports come as clean HTML pages. Reading is the default: a change to a bid, budget, status or negative is applied only after you see the full preview and say yes. Needs an Atom11 account and the Atom11 connector.",
   "author": {
     "name": "Atom11",
